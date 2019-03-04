@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
         <td>
-            @foreach (var cartItem in item.Carts)
+            @foreach (WebApplication1.Models.Cart cartItem in item.Carts)
             {
                 @cartItem.Product
                 @cartItem.ProductQuantity
