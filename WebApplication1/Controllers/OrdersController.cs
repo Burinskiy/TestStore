@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
         [Authorize(Roles ="StoreOwner")]
         public ActionResult Index()
         {
-            IEnumerable<Order> orders = db.Orders.Include(p=>p.Carts);
+            IEnumerable<Order> orders = db.Orders.Include(p=>p.Carts.Select(y => y.Product));
             return View(orders);
         }
 
@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
         
         public ActionResult SaveOrder()
         {
-            List<Cart> carts = (List<Cart>)Session["cart"];
+            ICollection<Cart> carts = (ICollection<Cart>)Session["cart"];
             foreach (Cart cart in carts)
             {
                 db.Carts.Add(cart);
