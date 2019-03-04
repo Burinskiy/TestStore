@@ -39,6 +39,7 @@ namespace WebApplication1.Controllers
             Order order = new Order { CreateDate = DateTime.Now, UserId = User.Identity.GetUserId(), Carts = carts};
             db.Orders.Add(order);
             db.SaveChanges();
+            Session["cart"] = null;
             return RedirectToAction("Index","Home");
         }
 

@@ -31,8 +31,7 @@
         <td>
             @foreach (WebApplication1.Models.Cart cartItem in item.Carts)
             {
-                @cartItem.Product.Name
-                @cartItem.ProductQuantity
+            <p>@cartItem.Product.Name @cartItem.ProductQuantity</p>
             }
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

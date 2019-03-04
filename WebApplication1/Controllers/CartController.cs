@@ -13,7 +13,9 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             IEnumerable<Cart> cart = (List<Cart>)Session["cart"];
-            return View(cart);
+            if (cart != null) { return View(cart); }
+            else return View();
+            
         }
 
         public ActionResult Buy(int id)
@@ -23,7 +25,7 @@ namespace WebApplication1.Controllers
             if (Session["cart"] == null)
             {
                 List<Cart> cart = new List<Cart>();
-                cart.Add(new Cart { Product = products.Where(s => s.Id == id).FirstOrDefault(), ProductQuantity = 1 });
+                cart.Add(new Cart { ProductId = id, ProductQuantity = 1 });
                 Session["cart"] = cart;
             }
             else
@@ -36,7 +38,7 @@ namespace WebApplication1.Controllers
                 }
                 else
                 {
-                    cart.Add(new Cart { Product = products.Where(p => p.Id == id).FirstOrDefault(), ProductQuantity = 1 });
+                    cart.Add(new Cart { ProductId = id, ProductQuantity = 1 });
                 }
                 Session["cart"] = cart;
             }
@@ -56,7 +58,7 @@ namespace WebApplication1.Controllers
         {
             List<Cart> cart = (List<Cart>)Session["cart"];
             for (int i = 0; i < cart.Count; i++)
-                if (cart[i].Product.Id.Equals(id))
+                if (cart[i].ProductId.Equals(id))
                     return i;
             return -1;
         }
