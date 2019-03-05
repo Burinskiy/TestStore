@@ -17,7 +17,8 @@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
-        <th></th>
+        <th>Products</th>
+        <th>Total</th>
         <th></th>
     </tr>
 
@@ -34,6 +35,7 @@
             {
                 <p>@cartItem.Product.Name @cartItem.ProductQuantity @(((int)(@cartItem.ProductQuantity / @cartItem.Product.PromoQuantity)) * @cartItem.Product.PromoPrice + (@cartItem.ProductQuantity % @cartItem.Product.PromoQuantity) * @cartItem.Product.RetailPrice) UAH</p>
             }
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Total) UAH
         </td>

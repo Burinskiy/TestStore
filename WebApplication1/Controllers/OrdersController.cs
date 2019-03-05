@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
             db.Orders.Add(order);
             db.SaveChanges();
             Session["cart"] = null;
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index");
         }
 
         // POST: Orders/Create
