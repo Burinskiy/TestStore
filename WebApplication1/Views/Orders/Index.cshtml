@@ -18,6 +18,7 @@
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -31,12 +32,15 @@
         <td>
             @foreach (WebApplication1.Models.Cart cartItem in item.Carts)
             {
-            <p>@cartItem.Product.Name @cartItem.ProductQuantity</p>
+                <p>@cartItem.Product.Name @cartItem.ProductQuantity @(((int)(@cartItem.ProductQuantity / @cartItem.Product.PromoQuantity)) * @cartItem.Product.PromoPrice + (@cartItem.ProductQuantity % @cartItem.Product.PromoQuantity) * @cartItem.Product.RetailPrice) UAH</p>
             }
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.Total) UAH
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

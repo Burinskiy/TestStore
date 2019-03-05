@@ -15,5 +15,6 @@ namespace WebApplication1.Models
         {
             Carts = new List<Cart>();
         }
+        public int Total { get; set; }
     }
 }

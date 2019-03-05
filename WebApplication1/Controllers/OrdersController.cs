@@ -17,6 +17,13 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             IEnumerable<Order> orders = db.Orders.Include(p=>p.Carts.Select(y => y.Product));
+            foreach (var order in orders)
+            {
+                foreach (Cart cart in order.Carts)
+                {
+                   order.Total += (int)((int)(cart.ProductQuantity / cart.Product.PromoQuantity)*cart.Product.PromoPrice + (cart.ProductQuantity % cart.Product.PromoQuantity) * cart.Product.RetailPrice);
+                }
+            }
             return View(orders);
         }
 

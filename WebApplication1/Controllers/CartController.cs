@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -12,7 +13,7 @@ namespace WebApplication1.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            IEnumerable<Cart> cart = (List<Cart>)Session["cart"];
+            IEnumerable<Cart> cart = (IEnumerable<Cart>)Session["cart"];
             if (cart != null) { return View(cart); }
             else return View();
             
@@ -25,7 +26,7 @@ namespace WebApplication1.Controllers
             if (Session["cart"] == null)
             {
                 List<Cart> cart = new List<Cart>();
-                cart.Add(new Cart { ProductId = id, ProductQuantity = 1 });
+                cart.Add(new Cart { ProductId = id, Product = products.Where(s=>s.Id == id).FirstOrDefault(), ProductQuantity = 1 });
                 Session["cart"] = cart;
             }
             else
@@ -38,7 +39,7 @@ namespace WebApplication1.Controllers
                 }
                 else
                 {
-                    cart.Add(new Cart { ProductId = id, ProductQuantity = 1 });
+                    cart.Add(new Cart { ProductId = id, Product = products.Where(s => s.Id == id).FirstOrDefault(), ProductQuantity = 1 });
                 }
                 Session["cart"] = cart;
             }
